@@ -3,40 +3,57 @@ package com.example.datastructure.queue;
 import java.util.Scanner;
 
 /**
- * 数组实现队列
+ * 链表实现队列
  *
  *     队列是一个有序列表，可以用数组或链表来实现，遵循先入先出的原则
  *
  * @author yupan@yijiupi.cn
  * @date 2020-04-22 14:37
  */
-public class ArrayQueue {
+public class LinkedListQueue {
 
     /**
-     *  队列容量（空余一个空间）
+     * 队列单个节点
+     */
+    private class Node {
+        private int data;
+        private Node next;
+
+        public Node(int data) {
+            this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" + "data=" + data + '}';
+        }
+    }
+
+    /**
+     *  队列容量
      */
     private int maxSize;
 
     /**
-     * 队列头指针：指向队列的第一个元素
+     * 队列头指针：指向队列的第一个节点
      */
-    private int head;
+    private Node head;
 
     /**
-     * 队列尾指针：指向队列的最后一个元素的后一个位置
+     * 队列尾指针：指向队列的最后一个节点
      */
-    private int tail;
+    private Node tail;
 
     /**
-     * 存放数据
+     * 队列元素个数
      */
-    private int[] arr;
+    private int realSize;
 
-    public ArrayQueue(int size) {
-        maxSize = size + 1;
-        arr = new int[maxSize];
-        head = 0;
-        tail = 0;
+    public LinkedListQueue(int size) {
+        this.maxSize = size;
+        this.realSize = 0;
+        this.head = null;
+        this.tail = null;
     }
 
     /**
@@ -44,7 +61,7 @@ public class ArrayQueue {
      * @return
      */
     public boolean isEmpty() {
-        return head == tail;
+        return realSize == 0;
     }
 
     /**
@@ -52,7 +69,7 @@ public class ArrayQueue {
      * @return
      */
     public boolean isFull() {
-        return (tail + 1) % maxSize == head;
+        return realSize == maxSize;
     }
 
     /**
@@ -64,8 +81,16 @@ public class ArrayQueue {
             System.out.println("添加失败，队列已满！");
             return;
         }
-        arr[tail] = o;
-        tail = (tail + 1) % maxSize;
+        Node node = new Node(o);
+        // 如果队列为空
+        if (isEmpty()) {
+            head = node;
+            tail = node;
+        } else {
+            tail.next = node;
+            tail = node;
+        }
+        realSize++;
     }
 
     /**
@@ -76,9 +101,14 @@ public class ArrayQueue {
         if (isEmpty()) {
             throw new RuntimeException("取出失败，队列已空！");
         }
-        int getValue = arr[head];
-        head = (head + 1) % maxSize;
-        return getValue;
+        int tmp = head.data;
+        head = head.next;
+        realSize--;
+        // 队列为空时，队列尾指针置为null
+        if (realSize == 0) {
+            tail = null;
+        }
+        return tmp;
     }
 
     /**
@@ -86,15 +116,19 @@ public class ArrayQueue {
      * @return
      */
     public int size() {
-        return (tail - head + maxSize) % maxSize;
+        return realSize;
     }
 
     /**
      * 显示队列数据
      */
     public void show() {
-        for (int i = head; i< head + size(); i++) {
-            System.out.printf("arr[%d]=%d\n", i % maxSize, arr[i % maxSize]);
+        if (head == null) {
+            System.out.println("队列为空！");
+            return;
+        }
+        for(Node temp = head; temp != null; temp = temp.next) {
+            System.out.println(temp);
         }
     }
 
@@ -106,16 +140,16 @@ public class ArrayQueue {
         if (isEmpty()) {
             throw new RuntimeException("队列头为空！");
         }
-        return arr[head];
+        return head.data;
     }
 
     public static void main(String[] args) {
-        ArrayQueue queue = new ArrayQueue(3);
+        LinkedListQueue queue = new LinkedListQueue(3);
         Scanner scanner = new Scanner(System.in);
         char key = ' ';
         boolean loop = true;
         while (loop) {
-            System.out.print("【数组实现队列】显示队列(s)、添加数据(a)、取出数据(g)、队列头数据(h)、队列元素个数(l)、退出(e)：");
+            System.out.print("【链表实现队列】显示队列(s)、添加数据(a)、取出数据(g)、队列头数据(h)、队列元素个数(l)、退出(e)：");
             key = scanner.next().charAt(0);
             switch (key) {
                 case 's': queue.show(); break;
@@ -124,16 +158,16 @@ public class ArrayQueue {
                     int value = scanner.nextInt();
                     queue.add(value);
                     break;
-                case 'g':
+                case 'h':
                     try {
-                        System.out.println("取出的数据是：" + queue.get());
+                        System.out.println("头数据是：" + queue.showHead());
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case 'h':
+                case 'g':
                     try {
-                        System.out.println("头数据是：" + queue.showHead());
+                        System.out.println("取出的数据是：" + queue.get());
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
