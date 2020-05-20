@@ -47,7 +47,7 @@ public class ArrayStack {
     /**
      * 入栈
      */
-    public void pop(int o) {
+    public void push(int o) {
         if (isFull()) {
             System.out.println("栈已满，无法入栈！");
             return;
@@ -59,7 +59,7 @@ public class ArrayStack {
      * 出栈
      * @return
      */
-    public int push() {
+    public int pop() {
         if (isEmpty()) {
             throw new RuntimeException("栈已空，无法出栈！");
         }
@@ -84,17 +84,17 @@ public class ArrayStack {
         char key = ' ';
         boolean loop = true;
         while (loop) {
-            System.out.print("【数组实现栈】入栈(p)、出栈(h)、打印栈(l)、退出(e)：");
+            System.out.print("【数组实现栈】入栈(h)、出栈(p)、打印栈(l)、退出(e)：");
             key = scanner.next().charAt(0);
             switch (key) {
-                case 'p':
+                case 'h':
                     System.out.print("入栈数据：");
                     int value = scanner.nextInt();
-                    arrayStack.pop(value);
+                    arrayStack.push(value);
                     break;
-                case 'h':
+                case 'p':
                     try {
-                        System.out.println("出栈数据：" + arrayStack.push());
+                        System.out.println("出栈数据：" + arrayStack.pop());
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
