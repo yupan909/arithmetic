@@ -81,11 +81,10 @@ public class ArrayStack {
     public static void main(String[] args) {
         ArrayStack arrayStack = new ArrayStack(4);
         Scanner scanner = new Scanner(System.in);
-        char key = ' ';
         boolean loop = true;
         while (loop) {
             System.out.print("【数组实现栈】入栈(h)、出栈(p)、打印栈(l)、退出(e)：");
-            key = scanner.next().charAt(0);
+            char key = scanner.next().charAt(0);
             switch (key) {
                 case 'h':
                     System.out.print("入栈数据：");

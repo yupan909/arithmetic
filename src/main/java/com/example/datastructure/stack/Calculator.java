@@ -1,5 +1,7 @@
 package com.example.datastructure.stack;
 
+import java.util.Objects;
+import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -134,8 +136,16 @@ public class Calculator {
     }
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
-        String exp = "10+(20*6-30)";
-        System.out.println(exp + "=" + calculator.calculate(exp));
+        while (true) {
+            System.out.printf("请输入表达式（输入exit退出）：");
+            String exp = scanner.nextLine();
+            if (Objects.equals(exp, "exit")) {
+                break;
+            }
+            System.out.println("计算结果：" + calculator.calculate(exp));
+        }
+        System.out.println("程序退出。。。");
     }
 }
