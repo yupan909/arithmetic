@@ -46,10 +46,7 @@ public class ShellSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[8];
-        for(int i=0; i<arr.length;i++) {
-            arr[i] = (int) (Math.random() * 100);
-        }
+        int[] arr = SortUtil.getArr(8);
         System.out.println("希尔排序前：" + Arrays.toString(arr));
         sort(arr);
         System.out.println("希尔排序后：" + Arrays.toString(arr));

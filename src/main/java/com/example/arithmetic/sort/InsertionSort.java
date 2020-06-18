@@ -42,9 +42,10 @@ public class InsertionSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = {1,4,8,6,2,7,5,3};
+        int[] arr = SortUtil.getArr(8);
+        System.out.println("插入排序前：" + Arrays.toString(arr));
         sort(arr);
-        System.out.println(Arrays.toString(arr));
+        System.out.println("插入排序后：" + Arrays.toString(arr));
     }
 
 }
