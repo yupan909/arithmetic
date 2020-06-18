@@ -31,28 +31,28 @@ public class ShellSort {
         for (int gap = n / 2; gap > 0; gap /= 2){
             // 对各个局部分组进行插入排序
             for (int i = gap; i < n; i++) {
-                insert(arr, gap, i);
+                // 插入排序
+                int temp = arr[i];
+                int j = i;
+                while (j - gap >= 0 && temp < arr[j - gap]) {
+                    arr[j] = arr[j - gap];
+                    j = j - gap;
+                }
+                if (j != i) {
+                    arr[j] = temp;
+                }
             }
         }
     }
 
-    /**
-     * 将arr[i]插入到所在分组的正确位置上
-     * arr[i]] 所在的分组为 ... arr[i-2*h],arr[i-h], arr[i+h] ...
-     */
-    public static void insert(int[] arr, int gap, int i) {
-        int temp = arr[i];
-        int k;
-        for (k = i - gap; k > 0 && temp < arr[k]; k -= gap) {
-            arr[k + gap] = arr[k];
-        }
-        arr[k + gap] = temp;
-    }
-
     public static void main(String[] args) {
-        int[] arr = {1,4,8,6,2,7,5,3};
+        int[] arr = new int[8];
+        for(int i=0; i<arr.length;i++) {
+            arr[i] = (int) (Math.random() * 100);
+        }
+        System.out.println("希尔排序前：" + Arrays.toString(arr));
         sort(arr);
-        System.out.println(Arrays.toString(arr));
+        System.out.println("希尔排序后：" + Arrays.toString(arr));
     }
 
 }
