@@ -25,53 +25,73 @@ import java.util.Arrays;
  */
 public class QuickSort {
 
-    public static int[] sort(int[] arr) {
-        return quickSort(arr, 0, arr.length-1);
+    public static void sort(int[] arr, int start, int end) {
+        if (start < end) {
+            // 三分取基准法(优化)
+            mid(arr, start, end);
+            // 找出基准元素，默认取第一个元素
+            int pivot = arr[start];
+            // 左边位置
+            int left = start;
+            // 右边位置
+            int right = end;
+
+            while (left < right) {
+                //（1）从右开始找到比基准小的数
+                while (left < right && arr[right] >= pivot) {
+                    right--;
+                }
+                // 交换比基准小的数到左端
+                arr[left] = arr[right];
+
+                //（2）从左开始找到比基准大的数
+                while (left < right && arr[left] <= pivot) {
+                    left++;
+                }
+                // 交换比基准大的数到右端
+                arr[right] = arr[left];
+            }
+            // 交换基准数
+            arr[left] = pivot;
+
+            // 递归排序左子数组
+            sort(arr, start, left - 1);
+            // 递归排序右子数组
+            sort(arr, left + 1, end);
+        }
     }
 
-    private static int[] quickSort(int[] arr, int left, int right) {
-        if (left < right) {
-            //获取中轴元素所处的位置
-            int mid = partition(arr, left, right);
-            //进行分割
-            arr = quickSort(arr, left, mid - 1);
-            arr = quickSort(arr, mid + 1, right);
+    /**
+     * 三分取基准法
+     */
+    private static void mid(int[] arr, int start, int end) {
+        // 每次找基准前让(low+high)/2中得到mid元素，然后让array[mid] < array[low] < array[high]
+        int mid = (end + start) / 2;
+        // mid和end对应的大的数给array[end]
+        if (arr[mid] > arr[end]) {
+            swap(arr, mid, end);
         }
-        return arr;
+        // start和end对应的大的数给array[end]
+        if (arr[start] > arr[end]) {
+            swap(arr, start, end);
+        }
+        // mid和start对应的大的数给array[start]
+        if (arr[mid] > arr[start]) {
+            swap(arr, mid, start);
+        }
     }
 
-    private static int partition(int[] arr, int left, int right) {
-        //选取中轴元素
-        int pivot = arr[left];
-        int i = left + 1;
-        int j = right;
-        while (true) {
-            // 向右找到第一个大于 pivot 的元素位置，停止移动
-            while (i <= j && arr[i] <= pivot) {
-                i++;
-            }
-            // 向左找到第一个小于 pivot 的元素位置，停止移动
-            while (i <= j && arr[j] >= pivot) {
-                j--;
-            }
-            if (i >= j) {
-                break;
-            }
-            //交换两个元素的位置，使得左边的元素不大于pivot,右边的不小于pivot
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        }
-        arr[left] = arr[j];
-        // 使中轴元素处于有序的位置
-        arr[j] = pivot;
-        return j;
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
     public static void main(String[] args) {
-        int[] arr = {4,1,8,6,2,7,5,3};
-        int[] result = sort(arr);
-        System.out.println(Arrays.toString(result));
+        int[] arr = SortUtil.getArr(8);
+        System.out.println("快速排序前：" + Arrays.toString(arr));
+        sort(arr, 0, arr.length-1);
+        System.out.println("快速排序后：" + Arrays.toString(arr));
     }
 
 }
