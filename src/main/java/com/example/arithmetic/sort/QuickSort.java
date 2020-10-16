@@ -25,7 +25,11 @@ import java.util.Arrays;
  */
 public class QuickSort {
 
-    public static void sort(int[] arr, int start, int end) {
+    public static void sort(int[] arr) {
+        quickSort(arr, 0, arr.length - 1);
+    }
+
+    private static void quickSort(int[] arr, int start, int end) {
         if (start < end) {
             // 三分取基准法(优化)
             mid(arr, start, end);
@@ -55,9 +59,9 @@ public class QuickSort {
             arr[left] = pivot;
 
             // 递归排序左子数组
-            sort(arr, start, left - 1);
+            quickSort(arr, start, left - 1);
             // 递归排序右子数组
-            sort(arr, left + 1, end);
+            quickSort(arr, left + 1, end);
         }
     }
 
@@ -90,7 +94,7 @@ public class QuickSort {
     public static void main(String[] args) {
         int[] arr = SortUtil.getArr(8);
         System.out.println("快速排序前：" + Arrays.toString(arr));
-        sort(arr, 0, arr.length-1);
+        sort(arr);
         System.out.println("快速排序后：" + Arrays.toString(arr));
     }
 

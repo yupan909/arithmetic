@@ -25,49 +25,71 @@ import java.util.Arrays;
  */
 public class MergeSort {
 
-    public static int[] sort(int[] arr){
-        if (arr == null || arr.length < 2) {
-            return arr;
+    public static void sort(int[] arr){
+        // 在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间
+        int[] temp = new int[arr.length];
+        mergeSort(arr, 0, arr.length-1, temp);
+    }
+
+    /**
+     * 分+合
+     */
+    private static void mergeSort(int[] arr, int left, int right, int[] temp) {
+        if (left < right) {
+            // 拆分成两个数组
+            int mid = (left + right) / 2;
+            // 左边归并排序，使得左子序列有序
+            mergeSort(arr, left, mid, temp);
+            // 右边归并排序，使得右子序列有序
+            mergeSort(arr, mid+1, right, temp);
+            // 将两个有序数组合并
+            merge(arr, left, mid, right, temp);
         }
-        // 拆分成两个数组
-        int middle = (int)Math.floor(arr.length / 2);
-
-        int[] left = Arrays.copyOfRange(arr, 0, middle);
-        int[] right = Arrays.copyOfRange(arr, middle, arr.length);
-
-        return merge(sort(left), sort(right));
     }
 
     /**
      * 合并函数，把两个有序的数组合并起来
+     * @param arr 待排序数组
+     * @param left 左边索引
+     * @param mid  中间索引
+     * @param right 右边索引
+     * @param temp 临时中转数组
      */
-    public static int[] merge(int[] left, int[] right) {
-        int[] result = new int[left.length + right.length];
-        int i = 0;
-        while (left.length > 0 && right.length > 0) {
-            if (left[0] <= right[0]) {
-                result[i++] = left[0];
-                left = Arrays.copyOfRange(left, 1, left.length);
+    private static void merge(int[] arr, int left, int mid, int right, int[] temp) {
+        // 左数组开始指针
+        int i = left;
+        // 右数组开始指针
+        int j = mid + 1;
+        // 临时中转数组开始指针
+        int t = 0;
+        // 1、依次比较左右两个数组，有序放入中转数组中
+        while(i <= mid && j <= right) {
+            if (arr[i] <= arr[j]) {
+                temp[t++] = arr[i++];
             } else {
-                result[i++] = right[0];
-                right = Arrays.copyOfRange(right, 1, right.length);
+                temp[t++] = arr[j++];
             }
         }
-        while (left.length > 0) {
-            result[i++] = left[0];
-            left = Arrays.copyOfRange(left, 1, left.length);
+        // 2、右数组为空时，将剩余左数组放入中转数组中
+        while(i <= mid) {
+            temp[t++] = arr[i++];
         }
-        while (right.length > 0) {
-            result[i++] = right[0];
-            right = Arrays.copyOfRange(right, 1, right.length);
+        // 3、左数组为空时，将剩余右数组放入中转数组中
+        while(j <= right) {
+            temp[t++] = arr[j++];
         }
-        return result;
+        // 4、将结果拷贝到原数组中
+        t = 0;
+        while(left <= right) {
+            arr[left++] = temp[t++];
+        }
     }
 
     public static void main(String[] args) {
-        int[] arr = {1,4,8,6,2,7,5,3};
-        int[] result = sort(arr);
-        System.out.println(Arrays.toString(result));
+        int[] arr = SortUtil.getArr(8);
+        System.out.println("归并排序前：" + Arrays.toString(arr));
+        sort(arr);
+        System.out.println("归并排序后：" + Arrays.toString(arr));
     }
 
 }
