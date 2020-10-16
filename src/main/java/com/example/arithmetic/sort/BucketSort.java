@@ -1,13 +1,12 @@
 package com.example.arithmetic.sort;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * 《桶排序》
  *      桶排序(Bucket sort)是一种基于计数的排序算法（计数排序可参考上节的内容），
+ *   桶排序是计数排序的扩展版本，计数排序可以看成每个桶只存储相同元素，而桶排序每个桶存储一定范围的元素，通过映射函数，
+ *   将待排序数组中的元素映射到各个对应的桶中，对每个桶中的元素进行排序，最后将非空桶中的元素逐个放入原序列中。
  *   工作的原理是将数据分到有限数量的桶子里，然后每个桶再分别排序（有可能再使用别的排序算法或是以递回方式继续使用桶排序进行排序）
  *
  * 【基本思想】
@@ -39,13 +38,13 @@ public class BucketSort {
                 max = arr[i];
             }
         }
-        int d = max - min;
+        int d = max - min + 1;
 
         // 2、初始化桶，默认的桶数量=5
         int bucketNum = 5;
-        ArrayList<LinkedList<Integer>> bucketList = new ArrayList<>(bucketNum);
+        List<List<Integer>> bucketList = new ArrayList<>(bucketNum);
         for (int i = 0; i < bucketNum; i++) {
-            bucketList.add(new LinkedList<>());
+            bucketList.add(new ArrayList<>());
         }
 
         // 3、遍历原数组，将每个元素放入桶中
@@ -72,9 +71,10 @@ public class BucketSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = {1,4,9,6,7,5,3,8,2};
+        int[] arr = SortUtil.getArr(8);
+        System.out.println("桶排序前：" + Arrays.toString(arr));
         sort(arr);
-        System.out.println(Arrays.toString(arr));
+        System.out.println("桶排序后：" + Arrays.toString(arr));
     }
 
 }
