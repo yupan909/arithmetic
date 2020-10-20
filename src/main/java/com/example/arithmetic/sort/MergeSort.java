@@ -3,7 +3,7 @@ package com.example.arithmetic.sort;
 import java.util.Arrays;
 
 /**
- * 《归并排序》
+ * 《归并排序》时间复杂度: O(n log n)
  *
  *    归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。
  *    作为一种典型的分而治之思想的算法应用，归并排序的实现由两种方法：

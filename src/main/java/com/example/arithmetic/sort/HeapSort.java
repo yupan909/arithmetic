@@ -3,7 +3,7 @@ package com.example.arithmetic.sort;
 import java.util.Arrays;
 
 /**
- * 《堆排序》
+ * 《堆排序》时间复杂度: O(n log n)
  *
  *       堆排序（Heapsort）是指利用堆这种数据结构（后面的【图解数据结构】内容会讲解分析）所设计的一种排序算法。
  *   堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。

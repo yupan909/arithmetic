@@ -3,7 +3,7 @@ package com.example.arithmetic.sort;
 import java.util.Arrays;
 
 /**
- * 《快速排序》
+ * 《快速排序》时间复杂度: O(n log n)
  *
  *    快速排序是由东尼·霍尔所发展的一种排序算法。在平均状况下，排序 n 个项目要 Ο(nlogn) 次比较。
  *    在最坏状况下则需要 Ο(n2) 次比较，但这种状况并不常见。事实上，快速排序通常明显比其他 Ο(nlogn) 算法更快，
