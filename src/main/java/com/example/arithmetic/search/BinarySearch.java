@@ -24,6 +24,13 @@ public class BinarySearch {
         if (left > right) {
             return -1;
         }
+        if (value == arr[left]) {
+            return left;
+        }
+        if (value == arr[right]) {
+            return right;
+        }
+
         // 取中间索引
         int mid = (left + right) / 2;
         // 查找值小于中间值，则从左边继续查找
@@ -40,7 +47,7 @@ public class BinarySearch {
 
     public static void main(String[] args) {
         int[] arr = new int[]{1, 3, 5, 6, 7, 8, 10};
-        int index = search(arr, 6);
+        int index = search(arr, 5);
         System.out.println("二分查找：" + index);
     }
 }
