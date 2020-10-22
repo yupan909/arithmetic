@@ -20,7 +20,7 @@ public class InsertionSearch {
         return insertionSearch(arr, 0, arr.length-1, value);
     }
 
-    public static int insertionSearch(int[] arr, int left, int right, int value){
+    private static int insertionSearch(int[] arr, int left, int right, int value){
         if (left > right) {
             return -1;
         }
