@@ -1,6 +1,7 @@
 package com.example.datastructure.linkedlist;
 
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * 单向链表
@@ -51,9 +52,8 @@ public class LinkedList {
 
     /**
      * 删除节点
-     * @param node
      */
-    public void del(Node node) {
+    public void del(Integer id) {
         if (head.getNext() == null) {
             System.out.println("链表为空，删除失败！");
         }
@@ -66,11 +66,29 @@ public class LinkedList {
             }
 
             // 找到待删除节点的前一个节点
-            if (Objects.equals(temp.getNext().getId(), node.getId())) {
+            if (Objects.equals(temp.getNext().getId(), id)) {
                 temp.setNext(temp.getNext().getNext());
             }
             temp = temp.getNext();
         }
+    }
+
+    /**
+     * 获取节点
+     */
+    public Node get(Integer id) {
+        if (head.getNext() == null) {
+            System.out.println("链表为空");
+            return null;
+        }
+        Node temp = head.getNext();
+        while(temp != null) {
+            if (Objects.equals(temp.getId(), id)) {
+                return temp;
+            }
+            temp = temp.getNext();
+        }
+        return null;
     }
 
     /**
@@ -113,45 +131,74 @@ public class LinkedList {
     }
 
     /**
+     * 反向打印
+     */
+    public void reversePrint() {
+        reversePrint2(head.getNext());
+    }
+
+    /**
      * 反向输出(递归)
      */
-    public void reversePrint(Node node) {
+    private void reversePrint2(Node node) {
         if (node != null) {
-            reversePrint(node.getNext());
+            reversePrint2(node.getNext());
             System.out.println(node);
         }
     }
 
     public static void main(String[] args) {
         LinkedList linked = new LinkedList();
-        Node node1 = new Node(1, "A");
-        Node node2 = new Node(2, "B");
-        Node node3 = new Node(3, "C");
-        Node node4 = new Node(4, "D");
-
-        System.out.println("====新增节点：");
-        linked.add(node1);
-        linked.add(node2);
-        linked.add(node3);
-        linked.add(node4);
-        linked.list();
-
-        System.out.println("====反向打印：");
-        linked.reversePrint(linked.head.getNext());
-
-        System.out.println("====反转节点：");
-        linked.reverse();
-        linked.list();
-
-        System.out.println("====修改节点：");
-        Node node5 = new Node(1, "E");
-        linked.update(node5);
-        linked.list();
-
-        System.out.println("====删除节点：");
-        linked.del(node1);
-        linked.del(node4);
-        linked.list();
+        Scanner scanner = new Scanner(System.in);
+        boolean loop = true;
+        while (loop) {
+            System.out.print("【单向链表】新增(1)、查找(2)、修改(3)、删除(4)、反转(5)、反向打印(6)、打印(7)、退出(0)：");
+            Integer key = scanner.nextInt();
+            switch (key) {
+                case 1:
+                    System.out.print("新增Id：");
+                    int id = scanner.nextInt();
+                    System.out.print("新增Data：");
+                    String data = scanner.next();
+                    Node node = new Node(id, data);
+                    linked.add(node);
+                    break;
+                case 2:
+                    System.out.print("查找Id：");
+                    int id2 = scanner.nextInt();
+                    System.out.println(linked.get(id2));
+                    break;
+                case 3:
+                    System.out.print("修改Id：");
+                    int updateId = scanner.nextInt();
+                    System.out.print("修改Data：");
+                    String updateData = scanner.next();
+                    Node updateNode = new Node(updateId, updateData);
+                    linked.update(updateNode);
+                    break;
+                case 4:
+                    System.out.print("删除Id：");
+                    int deleteId = scanner.nextInt();
+                    linked.del(deleteId);
+                    break;
+                case 5:
+                    linked.reverse();
+                    System.out.print("反转完成！");
+                    break;
+                case 6:
+                    linked.reversePrint();
+                    break;
+                case 7:
+                    linked.list();
+                    break;
+                case 0:
+                    scanner.close();
+                    loop = false;
+                    break;
+                default: break;
+            }
+        }
+        System.out.println("程序退出。。。");
     }
 }
 
