@@ -1,6 +1,7 @@
 package com.example.datastructure.linkedlist;
 
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * 双向链表
@@ -54,9 +55,8 @@ public class DoubleLinkedList {
 
     /**
      * 删除节点
-     * @param node
      */
-    public void del(DoubleNode node) {
+    public void del(Integer id) {
         if (first == null) {
             System.out.println("链表为空，删除失败！");
         }
@@ -64,7 +64,7 @@ public class DoubleLinkedList {
         // 遍历链表
         while(temp != null) {
             // 找到待删除节点
-            if (Objects.equals(temp.getId(), node.getId())) {
+            if (Objects.equals(temp.getId(), id)) {
                 // 找到待删除节点的上一节点和下一个节点
                 DoubleNode prevNode = temp.getPrev();
                 DoubleNode nextNode = temp.getNext();
@@ -89,6 +89,23 @@ public class DoubleLinkedList {
     }
 
     /**
+     * 获取节点
+     */
+    public DoubleNode get(Integer id) {
+        if (first == null) {
+            return null;
+        }
+        DoubleNode temp = first;
+        while(temp != null) {
+            if (Objects.equals(temp.getId(), id)) {
+                return temp;
+            }
+            temp = temp.getNext();
+        }
+        return null;
+    }
+
+    /**
      * 查看所有节点
      */
     public void list() {
@@ -105,26 +122,49 @@ public class DoubleLinkedList {
 
     public static void main(String[] args) {
         DoubleLinkedList doubleLinkedList = new DoubleLinkedList();
-        DoubleNode node1 = new DoubleNode(1, "AA");
-        DoubleNode node2 = new DoubleNode(2, "BB");
-        DoubleNode node3 = new DoubleNode(3, "CC");
-        DoubleNode node4 = new DoubleNode(4, "DD");
-
-        System.out.println("====新增节点：");
-        doubleLinkedList.add(node1);
-        doubleLinkedList.add(node2);
-        doubleLinkedList.add(node3);
-        doubleLinkedList.add(node4);
-        doubleLinkedList.list();
-
-        System.out.println("====修改节点：");
-        DoubleNode node5 = new DoubleNode(1, "EE");
-        doubleLinkedList.update(node5);
-        doubleLinkedList.list();
-
-        System.out.println("====删除节点：");
-        doubleLinkedList.del(node4);
-        doubleLinkedList.list();
+        Scanner scanner = new Scanner(System.in);
+        boolean loop = true;
+        while (loop) {
+            System.out.print("【双向链表】新增(1)、查找(2)、修改(3)、删除(4)、打印(5)、退出(0)：");
+            Integer key = scanner.nextInt();
+            switch (key) {
+                case 1:
+                    System.out.print("新增Id：");
+                    int id = scanner.nextInt();
+                    System.out.print("新增Data：");
+                    String data = scanner.next();
+                    DoubleNode node = new DoubleNode(id, data);
+                    doubleLinkedList.add(node);
+                    break;
+                case 2:
+                    System.out.print("查找Id：");
+                    int id2 = scanner.nextInt();
+                    System.out.println(doubleLinkedList.get(id2));
+                    break;
+                case 3:
+                    System.out.print("修改Id：");
+                    int updateId = scanner.nextInt();
+                    System.out.print("修改Data：");
+                    String updateData = scanner.next();
+                    DoubleNode updateNode = new DoubleNode(updateId, updateData);
+                    doubleLinkedList.update(updateNode);
+                    break;
+                case 4:
+                    System.out.print("删除Id：");
+                    int deleteId = scanner.nextInt();
+                    doubleLinkedList.del(deleteId);
+                    break;
+                case 5:
+                    doubleLinkedList.list();
+                    break;
+                case 0:
+                    scanner.close();
+                    loop = false;
+                    break;
+                default: break;
+            }
+        }
+        System.out.println("程序退出。。。");
     }
 
 }

@@ -183,7 +183,7 @@ public class LinkedList {
                     break;
                 case 5:
                     linked.reverse();
-                    System.out.print("反转完成！");
+                    System.out.println("反转完成！");
                     break;
                 case 6:
                     linked.reversePrint();

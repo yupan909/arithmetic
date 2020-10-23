@@ -146,11 +146,10 @@ public class LinkedListQueue {
     public static void main(String[] args) {
         LinkedListQueue queue = new LinkedListQueue(3);
         Scanner scanner = new Scanner(System.in);
-        char key = ' ';
         boolean loop = true;
         while (loop) {
             System.out.print("【链表实现队列】显示队列(s)、添加数据(a)、取出数据(g)、队列头数据(h)、队列元素个数(l)、退出(e)：");
-            key = scanner.next().charAt(0);
+            char key = scanner.next().charAt(0);
             switch (key) {
                 case 's': queue.show(); break;
                 case 'a':
