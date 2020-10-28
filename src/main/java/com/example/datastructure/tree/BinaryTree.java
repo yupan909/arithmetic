@@ -12,11 +12,17 @@ package com.example.datastructure.tree;
  */
 public class BinaryTree {
 
+    /**
+     * 根结点
+     */
+    private Node rootNode;
+
+    /**
+     * 结点类
+     */
     private class Node {
         private String name;
-
         private Node left;
-
         private Node right;
 
         public Node(String name, Node left, Node right) {
@@ -25,83 +31,113 @@ public class BinaryTree {
             this.right = right;
         }
 
-        @Override
-        public String toString() {
-            return "Node{" + "name=" + name + '}';
+        // 前序遍历
+        public void beforeOrder() {
+            if (this == null) {
+                return;
+            }
+            // 1、输出结点
+            System.out.printf("%s\t", this.name);
+            // 2、前序遍历左子树
+            if (this.left != null) {
+                this.left.beforeOrder();
+            }
+            // 3、前序遍历右子树
+            if (this.right != null) {
+                this.right.beforeOrder();
+            }
+        }
+
+        // 中序遍历
+        public void middleOrder() {
+            if (this == null) {
+                return;
+            }
+            // 1、中序遍历左子树
+            if (this.left != null) {
+                this.left.middleOrder();
+            }
+            // 2、输出结点
+            System.out.printf("%s\t", this.name);
+            // 3、中序遍历右子树
+            if (this.right != null) {
+                this.right.middleOrder();
+            }
+        }
+
+        // 后序遍历
+        public void afterOrder() {
+            if (this == null) {
+                return;
+            }
+            // 1、后序遍历左子树
+            if (this.left != null) {
+                this.left.afterOrder();
+            }
+            // 2、后序遍历右子树
+            if (this.right != null) {
+                this.right.afterOrder();
+            }
+            // 3、输出结点
+            System.out.printf("%s\t", this.name);
         }
     }
 
-    /**
-     * 初始化二叉树
-     */
-    public Node init() {
+    public BinaryTree() {
+        // 初始化二叉树
         Node E = new Node("E", null, null);
         Node D = new Node("D", null, null);
         Node B = new Node("B", D, E);
         Node C = new Node("C", null, null);
-        Node A = new Node("A", B, C);
-        return A;
+        this.rootNode = new Node("A", B, C);
     }
 
     /**
      * 前序遍历
      */
-    public void beforeOrder(Node node) {
-        if (node == null) {
+    public void beforeOrderPrint() {
+        if (rootNode == null) {
+            System.out.println("空树遍历为空");
             return;
         }
-        // 1、输出结点
-        System.out.printf("%s\t", node.name);
-        // 2、前序遍历左子树
-        beforeOrder(node.left);
-        // 3、前序遍历右子树
-        beforeOrder(node.right);
+        rootNode.beforeOrder();
     }
 
     /**
      * 中序遍历
      */
-    public void middleOrder(Node node) {
-        if (node == null) {
+    public void middleOrderPrint() {
+        if (rootNode == null) {
+            System.out.println("空树遍历为空");
             return;
         }
-        // 1、中序遍历左子树
-        middleOrder(node.left);
-        // 2、输出结点
-        System.out.printf("%s\t", node.name);
-        // 3、中序遍历右子树
-        middleOrder(node.right);
+        rootNode.middleOrder();
     }
 
     /**
      * 后序遍历
      */
-    public void afterOrder(Node node) {
-        if (node == null) {
+    public void afterOrderPrint() {
+        if (rootNode == null) {
+            System.out.println("空树遍历为空");
             return;
         }
-        // 1、后序遍历左子树
-        afterOrder(node.left);
-        // 2、后序遍历右子树
-        afterOrder(node.right);
-        // 3、输出结点
-        System.out.printf("%s\t", node.name);
+        rootNode.afterOrder();
     }
 
     public static void main(String[] args) {
         BinaryTree binaryTree = new BinaryTree();
-        Node node = binaryTree.init();
         // A B D E C
         System.out.print("前序遍历：");
-        binaryTree.beforeOrder(node);
+        binaryTree.beforeOrderPrint();
         System.out.println();
         // D B E A C
         System.out.print("中序遍历：");
-        binaryTree.middleOrder(node);
+        binaryTree.middleOrderPrint();
         System.out.println();
         // D E B C A
         System.out.print("后序遍历：");
-        binaryTree.afterOrder(node);
+        binaryTree.afterOrderPrint();
     }
 
 }
