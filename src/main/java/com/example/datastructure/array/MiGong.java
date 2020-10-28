@@ -1,4 +1,4 @@
-package com.example.datastructure.recursion;
+package com.example.datastructure.array;
 
 /**
  * 递归回溯算法解决迷宫问题
