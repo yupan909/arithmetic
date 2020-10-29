@@ -101,18 +101,18 @@ public class ThreadedBinaryTree {
     }
 
     /**
-     * 遍历中序线索化二叉树
+     * 中序遍历按后继方式线索化二叉树
      */
-    public void middleThreadOrderList() {
+    public void middleOrderThreadListAfter() {
         TreeNode node = rootNode;
         while (node != null) {
             // 1、找中序遍历方式开始的节点
-            while(node.leftType == 0) {
+            while(node.left != null && node.leftType == 0) {
                 node = node.left;
             }
             System.out.printf("%s ", node.name);
             // 2、如果右指针是线索，直接输出
-            while (node.rightType == 1) {
+            while (node.right != null && node.rightType == 1) {
                 node = node.right;
                 System.out.printf("%s ", node.name);
             }
@@ -121,12 +121,38 @@ public class ThreadedBinaryTree {
         }
     }
 
+    /**
+     * 中序遍历按前驱方式线索化二叉树
+     */
+    public void middleOrderThreadListBefore() {
+        TreeNode node = rootNode;
+        while (node != null) {
+            // 1、找中序遍历方式开始的节点
+            while(node.right != null && node.rightType == 0) {
+                node = node.right;
+            }
+            System.out.printf("%s ", node.name);
+            // 2、如果右指针是线索，直接输出
+            while (node.left != null && node.leftType == 1) {
+                node = node.left;
+                System.out.printf("%s ", node.name);
+            }
+            // 3、如果右指针不是线索，找到右子树开始的节点
+            node = node.left;
+        }
+    }
+
     public static void main(String[] args) {
         ThreadedBinaryTree binaryTree = new ThreadedBinaryTree();
         // D B E A C
         binaryTree.middleThreadOrder();
-        System.out.print("遍历中序线索化二叉树：");
-        binaryTree.middleThreadOrderList();
+        System.out.print("中序遍历按后继方式线索化二叉树：");
+        binaryTree.middleOrderThreadListAfter();
+
+        System.out.println();
+
+        System.out.print("中序遍历按前驱方式线索化二叉树：");
+        binaryTree.middleOrderThreadListBefore();
     }
 
 }
