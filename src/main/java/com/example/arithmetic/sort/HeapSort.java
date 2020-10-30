@@ -28,60 +28,46 @@ import java.util.Arrays;
  */
 public class HeapSort {
 
-    public static int[] sort(int[] arr) {
-        int len = arr.length;
+    public static void sort(int[] arr) {
+        // 1、构建二叉堆
+        for (int i = arr.length/2-1; i >= 0; i--) {
+            // 从第一个非叶子结点（arr.length/2-1）从下至上，从右至左调整结构
+            adjustHeap(arr, i, arr.length);
+        }
 
-        // 构建二叉堆
-        buildMaxHeap(arr, len);
-
-        // 进行堆排序
-        for (int i = len - 1; i > 0; i--) {
-            // 把堆顶的元素与最后一个元素交换
+        // 2、调整堆结构+交换堆顶元素与末尾元素
+        for (int i = arr.length - 1; i > 0; i--) {
+            // 将堆顶元素与末尾元素进行交换
             swap(arr, 0, i);
-
-            len--;
-
-            // 堆中剩余的元素重新调整，再次构成大顶堆
-            heapify(arr, 0, len);
-        }
-        return arr;
-    }
-
-    /**
-     * 建立大顶堆
-     */
-    public static void buildMaxHeap(int[] arr, int len) {
-        // 构建二叉堆
-        for (int i = (int) Math.floor(len / 2); i >= 0; i--) {
-            heapify(arr, i, len);
+            // 重新对堆进行调整
+            adjustHeap(arr, 0, i);
         }
     }
 
     /**
-     * 堆调整，构成大顶堆
+     * 调整大顶堆（仅是调整过程，建立在大顶堆已构建的基础上）
      */
-    private static void heapify(int[] arr, int i, int len) {
-        // 定位左孩子节点位置
-        int left = 2 * i + 1;
-        // 定位右孩子节点位置
-        int right = 2 * i + 2;
-        // 临时保证要下沉的元素位置
-        int largest = i;
+    private static void adjustHeap(int[] arr, int i, int len) {
+        // 先取出当前元素i
+        int temp = arr[i];
+        // 从i结点的左子结点开始，也就是2i+1处开始
+        for (int k = 2 * i + 1; k < len; k = k * 2 + 1) {
+            // 1、如果左子结点小于右子结点，k指向右子结点
+            if (k + 1 < len && arr[k] < arr[k+1]) {
+                k++;
+            }
 
-        // 如果小于左节点，则交换位置
-        if (left < len && arr[left] > arr[largest]) {
-            largest = left;
+            // 2、如果子节点大于父节点，将子节点值赋给父节点（不用进行交换）
+            if (arr[k] > temp) {
+                arr[i] = arr[k];
+                i = k;
+            } else {
+                // 如果父结点的值已经大于孩子结点的值，则直接结束
+                break;
+            }
         }
-        // 如果小于右节点，则交换位置
-        if (right < len && arr[right] > arr[largest]) {
-            largest = right;
-        }
-
-        if (largest != i) {
-            swap(arr, i, largest);
-            // 继续下沉
-            heapify(arr, largest, len);
-        }
+        // 将temp值放到最终的位置
+        arr[i] = temp;
     }
 
     private static void swap(int[] arr, int i, int j) {
@@ -91,9 +77,10 @@ public class HeapSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = {4,1,8,6,2,7,5,3};
-        int[] result = sort(arr);
-        System.out.println(Arrays.toString(result));
+        int[] arr = SortUtil.getArr(8);
+        System.out.println("堆排序前：" + Arrays.toString(arr));
+        sort(arr);
+        System.out.println("堆排序后：" + Arrays.toString(arr));
     }
 
 }
