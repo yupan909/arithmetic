@@ -47,6 +47,25 @@ public class HuffmanTree {
             this.right = right;
         }
 
+        /**
+         * 前序遍历
+         */
+        public void beforeOrder() {
+            if (this == null) {
+                return;
+            }
+            // 1、输出结点
+            System.out.printf("%s ", this.value);
+            // 2、前序遍历左子树
+            if (this.left != null) {
+                this.left.beforeOrder();
+            }
+            // 3、前序遍历右子树
+            if (this.right != null) {
+                this.right.beforeOrder();
+            }
+        }
+
         @Override
         public int compareTo(TreeNode o) {
             return this.value - o.value;
@@ -61,19 +80,7 @@ public class HuffmanTree {
             System.out.println("前序遍历为空");
             return;
         }
-        beforeOrderPrint(rootNode);
-    }
-
-    private void beforeOrderPrint(TreeNode node) {
-        if (node == null) {
-            return;
-        }
-        // 1、输出结点
-        System.out.printf("%s ", node.value);
-        // 2、前序遍历左子树
-        beforeOrderPrint(node.left);
-        // 3、前序遍历右子树
-        beforeOrderPrint(node.right);
+        rootNode.beforeOrder();
     }
 
     /**

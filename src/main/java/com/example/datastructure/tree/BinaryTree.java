@@ -33,6 +33,111 @@ public class BinaryTree {
             this.left = left;
             this.right = right;
         }
+
+        /**
+         * 前序遍历
+         */
+        public void beforeOrder() {
+            if (this == null) {
+                return;
+            }
+            // 1、输出结点
+            System.out.printf("%s ", this.name);
+            // 2、前序遍历左子树
+            if (this.left != null) {
+                this.left.beforeOrder();
+            }
+            // 3、前序遍历右子树
+            if (this.right != null) {
+                this.right.beforeOrder();
+            }
+        }
+
+        /**
+         * 中序遍历
+         */
+        public void middleOrder() {
+            if (this == null) {
+                return;
+            }
+            // 1、中序遍历左子树
+            if (this.left != null) {
+                this.left.middleOrder();
+            }
+            // 2、输出结点
+            System.out.printf("%s ", this.name);
+            // 3、中序遍历右子树
+            if (this.right != null) {
+                this.right.middleOrder();
+            }
+        }
+
+        /**
+         * 后序遍历
+         */
+        public void afterOrder() {
+            if (this == null) {
+                return;
+            }
+            // 1、后序遍历左子树
+            if (this.left != null) {
+                this.left.afterOrder();
+            }
+            // 2、后序遍历右子树
+            if (this.right != null) {
+                this.right.afterOrder();
+            }
+            // 3、输出结点
+            System.out.printf("%s ", this.name);
+        }
+
+        /**
+         * 查找结点（前序遍历）
+         */
+        public boolean beforeOrderSearch(TreeNode node) {
+            if (this == null) {
+                return false;
+            }
+            // 1、比较查找值跟当前结点是否相等，如果相等则直接返回
+            if (Objects.equals(node.name, this.name)) {
+                return true;
+            }
+            // 2、当前结点没找到的话，则继续从左子树去查找
+            boolean bool = false;
+            if (this.left != null) {
+                bool = this.left.beforeOrderSearch(node);
+            }
+            // 3、左子树没找到的话，则继续从右子树去查找
+            if (!bool) {
+                if (this.right != null) {
+                    bool = this.right.beforeOrderSearch(node);
+                }
+            }
+            return bool;
+        }
+
+        /**
+         * 删除结点
+         */
+        public void deleteNode(TreeNode node){
+            // 由于结点是单向的，根据父结点可以找到子结点，而子结点找不到父结点，所以需要判断子结点是不是要删除的结点
+            if (this == null) {
+                return;
+            }
+            // 1、如果左结点就是删除结点，则将左结点设为null，直接返回
+            if (this.left != null && Objects.equals(this.left.name, node.name)) {
+                this.left = null;
+                return;
+            }
+            // 2、如果右结点就是删除结点，则将右结点设为null，直接返回
+            if (this.right != null && Objects.equals(this.right.name, node.name)) {
+                this.right = null;
+                return;
+            }
+            // 3、找不到删除结点，则分别向左右结点递归
+            this.left.deleteNode(node);
+            this.right.deleteNode(node);
+        }
     }
 
     public BinaryTree() {
@@ -57,19 +162,7 @@ public class BinaryTree {
             System.out.println("前序遍历为空");
             return;
         }
-        beforeOrderPrint(rootNode);
-    }
-
-    private void beforeOrderPrint(TreeNode node) {
-        if (node == null) {
-            return;
-        }
-        // 1、输出结点
-        System.out.printf("%s ", node.name);
-        // 2、前序遍历左子树
-        beforeOrderPrint(node.left);
-        // 3、前序遍历右子树
-        beforeOrderPrint(node.right);
+        rootNode.beforeOrder();
     }
 
     /**
@@ -80,19 +173,7 @@ public class BinaryTree {
             System.out.println("中序遍历为空");
             return;
         }
-        middleOrderPrint(rootNode);
-    }
-
-    private void middleOrderPrint(TreeNode node) {
-        if (node == null) {
-            return;
-        }
-        // 1、中序遍历左子树
-        middleOrderPrint(node.left);
-        // 2、输出结点
-        System.out.printf("%s ", node.name);
-        // 3、中序遍历右子树
-        middleOrderPrint(node.right);
+        rootNode.middleOrder();
     }
 
     /**
@@ -103,19 +184,7 @@ public class BinaryTree {
             System.out.println("空树遍历为空");
             return;
         }
-        afterOrderPrint(rootNode);
-    }
-
-    private void afterOrderPrint(TreeNode node) {
-        if (node == null) {
-            return;
-        }
-        // 1、后序遍历左子树
-        afterOrderPrint(node.left);
-        // 2、后序遍历右子树
-        afterOrderPrint(node.right);
-        // 3、输出结点
-        System.out.printf("%s ", node.name);
+        rootNode.afterOrder();
     }
 
     /**
@@ -125,30 +194,8 @@ public class BinaryTree {
         if (rootNode == null) {
             return false;
         }
-        return beforeOrderSearch(rootNode, name);
-    }
-
-    private boolean beforeOrderSearch(TreeNode node, String name) {
-        if (node == null) {
-            return false;
-        }
-        // 1、比较查找值跟当前结点是否相等，如果相等则直接返回
-        System.out.print("比较+1; ");
-        if (Objects.equals(node.name, name)) {
-            return true;
-        }
-        // 2、当前结点没找到的话，则继续从左子树去查找
-        boolean bool = false;
-        if (node.left != null) {
-            bool = beforeOrderSearch(node.left, name);
-        }
-        // 3、左子树没找到的话，则继续从右子树去查找
-        if (!bool) {
-            if (node.right != null) {
-                bool = beforeOrderSearch(node.right, name);
-            }
-        }
-        return bool;
+        TreeNode node = new TreeNode(name, null, null);
+        return rootNode.beforeOrderSearch(node);
     }
 
     /**
@@ -164,28 +211,8 @@ public class BinaryTree {
             rootNode = null;
             return;
         }
-        deleteNode(rootNode, name);
-    }
-
-    private void deleteNode(TreeNode node, String name){
-        // 由于结点是单向的，根据父结点可以找到子结点，而子结点找不到父结点，所以需要判断子结点是不是要删除的结点
-        if (node == null) {
-            return;
-        }
-        // 1、如果左结点就是删除结点，则将左结点设为null，直接返回
-        if (node.left != null && Objects.equals(node.left.name, name)) {
-            node.left = null;
-            return;
-        }
-
-        // 2、如果右结点就是删除结点，则将右结点设为null，直接返回
-        if (node.right != null && Objects.equals(node.right.name, name)) {
-            node.right = null;
-            return;
-        }
-        // 3、找不到删除结点，则分别向左右结点递归
-        deleteNode(node.left, name);
-        deleteNode(node.right, name);
+        TreeNode node = new TreeNode(name, null, null);
+        rootNode.deleteNode(node);
     }
 
     public static void main(String[] args) {
