@@ -227,6 +227,7 @@ public class BinarySortTree {
             }
         // (2) 删除有两棵子树的节点
         } else if (targetNode.left != null && targetNode.right != null) {
+            // 从targetNode的右子树中，找到最小的节点，先删除这个最小结点，然后把最小结点的值保存到targetNode中
             int minVal = delTreeMin(targetNode.right);
             targetNode.value = minVal;
         // (3) 删除只有一棵子树的节点
