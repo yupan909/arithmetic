@@ -132,12 +132,12 @@ public class ThreadedBinaryTree {
                 node = node.right;
             }
             System.out.printf("%s ", node.name);
-            // 2、如果右指针是线索，直接输出
+            // 2、如果左指针是线索，直接输出
             while (node.left != null && node.leftType == 1) {
                 node = node.left;
                 System.out.printf("%s ", node.name);
             }
-            // 3、如果右指针不是线索，找到右子树开始的节点
+            // 3、如果左指针不是线索，找到左子树开始的节点
             node = node.left;
         }
     }
