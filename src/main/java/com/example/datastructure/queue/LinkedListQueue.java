@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @author yupan@yijiupi.cn
  * @date 2020-04-22 14:37
  */
-public class LinkedListQueue {
+public class LinkedListQueue implements Queue {
 
     /**
      * 队列单个节点
@@ -60,6 +60,7 @@ public class LinkedListQueue {
      * 判断队列是否为空
      * @return
      */
+    @Override
     public boolean isEmpty() {
         return realSize == 0;
     }
@@ -68,6 +69,7 @@ public class LinkedListQueue {
      * 判断队列是否已满
      * @return
      */
+    @Override
     public boolean isFull() {
         return realSize == maxSize;
     }
@@ -76,6 +78,7 @@ public class LinkedListQueue {
      * 添加数据
      * @param o
      */
+    @Override
     public void add(int o) {
         if (isFull()) {
             System.out.println("添加失败，队列已满！");
@@ -97,6 +100,7 @@ public class LinkedListQueue {
      * 取出数据
      * @return
      */
+    @Override
     public int get() {
         if (isEmpty()) {
             throw new RuntimeException("取出失败，队列已空！");
@@ -115,6 +119,7 @@ public class LinkedListQueue {
      * 队列元素个数
      * @return
      */
+    @Override
     public int size() {
         return realSize;
     }
@@ -122,6 +127,7 @@ public class LinkedListQueue {
     /**
      * 显示队列数据
      */
+    @Override
     public void show() {
         if (head == null) {
             System.out.println("队列为空！");
@@ -136,6 +142,7 @@ public class LinkedListQueue {
      * 显示队列头数据
      * @return
      */
+    @Override
     public int showHead() {
         if (isEmpty()) {
             throw new RuntimeException("队列头为空！");

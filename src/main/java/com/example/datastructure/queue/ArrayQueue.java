@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @author yupan@yijiupi.cn
  * @date 2020-04-22 14:37
  */
-public class ArrayQueue {
+public class ArrayQueue implements Queue {
 
     /**
      *  队列容量（空余一个空间）
@@ -43,6 +43,7 @@ public class ArrayQueue {
      * 判断队列是否为空
      * @return
      */
+    @Override
     public boolean isEmpty() {
         return head == tail;
     }
@@ -51,6 +52,7 @@ public class ArrayQueue {
      * 判断队列是否已满
      * @return
      */
+    @Override
     public boolean isFull() {
         return (tail + 1) % maxSize == head;
     }
@@ -59,6 +61,7 @@ public class ArrayQueue {
      * 添加数据
      * @param o
      */
+    @Override
     public void add(int o) {
         if (isFull()) {
             System.out.println("添加失败，队列已满！");
@@ -72,6 +75,7 @@ public class ArrayQueue {
      * 取出数据
      * @return
      */
+    @Override
     public int get() {
         if (isEmpty()) {
             throw new RuntimeException("取出失败，队列已空！");
@@ -85,6 +89,7 @@ public class ArrayQueue {
      * 队列元素个数
      * @return
      */
+    @Override
     public int size() {
         return (tail - head + maxSize) % maxSize;
     }
@@ -92,6 +97,7 @@ public class ArrayQueue {
     /**
      * 显示队列数据
      */
+    @Override
     public void show() {
         for (int i = head; i< head + size(); i++) {
             System.out.printf("arr[%d]=%d\n", i % maxSize, arr[i % maxSize]);
@@ -102,6 +108,7 @@ public class ArrayQueue {
      * 显示队列头数据
      * @return
      */
+    @Override
     public int showHead() {
         if (isEmpty()) {
             throw new RuntimeException("队列头为空！");
