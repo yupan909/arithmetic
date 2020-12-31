@@ -20,6 +20,9 @@ public class BinarySearch {
         return binarySearch(arr, 0, arr.length-1, value);
     }
 
+    /**
+     * 递归方式
+     */
     private static int binarySearch(int[] arr, int left, int right, int value){
         if (left > right) {
             return -1;
