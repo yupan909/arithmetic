@@ -12,6 +12,14 @@ package com.example.arithmetic.common;
  *
  *  汉诺塔问题：
  *     存在三根柱子（ABC）,柱子上存在着若干小圆盘，要求把小圆盘从最左边的柱子搬运到最右边，要求小的圆盘需要在大的盘子上面,上面的盘比下面的盘先动（所有圆盘的初始位置在最左边）
+ *
+ *                      ｜                      |                     |
+ *                    【  】                    ｜                    ｜
+ *                   【    】                   ｜                    ｜
+ *                  【      】                  ｜                    ｜
+ *                ——————————————          ——————————————        ——————————————
+ *                       A                      B                      C
+ *
  *  分析思路:
  *    1.如果只有一个盘，从A杆到C杆直接 A->C即可
  *    2.如果有两个盘的话，先把上面一个盘 A->B,然后把下面一个盘 A->C,然后把上面一个盘从B->C
@@ -23,7 +31,7 @@ package com.example.arithmetic.common;
  */
 public class DivideAndConquer {
 
-    /**
+    /**　
      * 汉诺塔问题
      */
     private static void hanoiTower(int num, char a, char b, char c) {
