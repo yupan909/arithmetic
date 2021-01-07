@@ -70,10 +70,32 @@ public class KMP {
         return next;
     }
 
+    /**
+     * 暴力算法匹配字符串，返回字符串第一次出现的位置
+     * @return
+     */
+    public static int forceSearch(String src, String dest) {
+        int m = src.length();
+        int n = dest.length();
+        for (int i = 0; i <= m - n; i++) {
+            int j;
+            for (j = 0; j < n; j++) {
+                if (src.charAt(i+j) != dest.charAt(j)) {
+                    break;
+                }
+            }
+            if (j == n) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         String src = "BBC ABCDAB ABCDABCDABDE";
         String dest = "ABCDABD";
         System.out.println("KMP算法：" + kmpSearch(src, dest));
+        System.out.println("暴力匹配算法：" + forceSearch(src, dest));
     }
 }
 
