@@ -51,4 +51,8 @@ public interface Graph<V, E> {
      */
     int size();
 
+    /**
+     * 获取顶点的索引
+     */
+    int indexOfVertex(V v);
 }

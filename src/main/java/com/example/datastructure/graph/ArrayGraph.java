@@ -50,9 +50,17 @@ public class ArrayGraph<V, E> implements Graph<V, E> {
     }
 
     /**
+     * 根据索引获取顶点
+     */
+    public Object getVertexOfIndex(int index) {
+        return vertexArray[index];
+    }
+
+    /**
      * 获取顶点的索引
      */
-    private int indexOfVertex(V v) {
+    @Override
+    public int indexOfVertex(V v) {
         for (int i = 0; i < vertexSize; i++) {
             if (vertexArray[i] != null && Objects.equals(vertexArray[i], v)) {
                 return i;
@@ -117,6 +125,13 @@ public class ArrayGraph<V, E> implements Graph<V, E> {
     @Override
     public int size() {
         return vertexSize;
+    }
+
+    /**
+     * 存放边的二维数组
+     */
+    public Object[][] getEdgeArray() {
+        return this.edgeArray;
     }
 
     /**
