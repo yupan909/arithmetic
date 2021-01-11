@@ -52,6 +52,11 @@ public interface Graph<V, E> {
     int size();
 
     /**
+     * 获取边数量
+     */
+    int edgeSize();
+
+    /**
      * 获取顶点的索引
      */
     int indexOfVertex(V v);

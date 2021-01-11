@@ -33,6 +33,11 @@ public class ArrayGraph<V, E> implements Graph<V, E> {
     private Object[][] edgeArray;
 
     /**
+     * 边的实际数量
+     */
+    private int edgeSize;
+
+    /**
      * 顶点的实际数量
      */
     private int vertexSize;
@@ -98,6 +103,7 @@ public class ArrayGraph<V, E> implements Graph<V, E> {
         }
         edgeArray[index1][index2] = e;
         edgeArray[index2][index1] = e;
+        edgeSize++;
     }
 
     /**
@@ -124,7 +130,15 @@ public class ArrayGraph<V, E> implements Graph<V, E> {
      */
     @Override
     public int size() {
-        return vertexSize;
+        return this.vertexSize;
+    }
+
+    /**
+     * 获取边数量
+     */
+    @Override
+    public int edgeSize() {
+        return this.edgeSize;
     }
 
     /**
@@ -279,6 +293,7 @@ public class ArrayGraph<V, E> implements Graph<V, E> {
         arrayGraph.print();
 
         System.out.println("获取顶点数量:" + arrayGraph.size());
+        System.out.println("获取边数量:" + arrayGraph.edgeSize());
         System.out.println("获取边:" + arrayGraph.getEdge("A", "B"));
         System.out.println("深度优先搜索遍历（DFS）：");
         arrayGraph.dfs();
