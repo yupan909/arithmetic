@@ -84,6 +84,8 @@ public class ArrayGraph<V, E> implements Graph<V, E> {
             return;
         }
         vertexArray[vertexSize++] = v;
+        // 同一顶点组成的边权值为0
+        edgeArray[indexOfVertex(v)][indexOfVertex(v)] = 0;
     }
 
     /**
@@ -269,7 +271,7 @@ public class ArrayGraph<V, E> implements Graph<V, E> {
     public void print() {
         for (int i = 0; i < vertexSize; i++) {
             for (int j=0; j < vertexSize; j++) {
-                System.out.printf("%s\t", edgeArray[i][j] == null ? 0 : edgeArray[i][j]);
+                System.out.printf("%s\t", edgeArray[i][j] == null ? "-" : edgeArray[i][j]);
             }
             System.out.println();
         }
