@@ -30,39 +30,42 @@ public class QuickSort {
     }
 
     private static void quickSort(int[] arr, int start, int end) {
-        if (start < end) {
-            // 三分取基准法(优化)
-            mid(arr, start, end);
-            // 找出基准元素，默认取第一个元素
-            int pivot = arr[start];
-            // 左边位置
-            int left = start;
-            // 右边位置
-            int right = end;
-
-            while (left < right) {
-                //（1）从右开始找到比基准小的数
-                while (left < right && arr[right] >= pivot) {
-                    right--;
-                }
-                // 交换比基准小的数到左端
-                arr[left] = arr[right];
-
-                //（2）从左开始找到比基准大的数
-                while (left < right && arr[left] <= pivot) {
-                    left++;
-                }
-                // 交换比基准大的数到右端
-                arr[right] = arr[left];
-            }
-            // 交换基准数
-            arr[left] = pivot;
-
-            // 递归排序左子数组
-            quickSort(arr, start, left - 1);
-            // 递归排序右子数组
-            quickSort(arr, left + 1, end);
+        if (start > end) {
+            return;
         }
+        // 三分取基准法(优化)
+        mid(arr, start, end);
+        // 找出基准元素，默认取第一个元素
+        int pivot = arr[start];
+        // 左边位置
+        int left = start;
+        // 右边位置
+        int right = end;
+
+        while (left < right) {
+            //（1）从右开始找到比基准小的数
+            while (left < right && arr[right] >= pivot) {
+                right--;
+            }
+            //（2）从左开始找到比基准大的数
+            while (left < right && arr[left] <= pivot) {
+                left++;
+            }
+            // (3) 交换两个数在数组中的位置
+            if (left < right) {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+            }
+        }
+        // 交换基准数
+        arr[start] = arr[left];
+        arr[left] = pivot;
+
+        // 递归排序左子数组
+        quickSort(arr, start, left - 1);
+        // 递归排序右子数组
+        quickSort(arr, left + 1, end);
     }
 
     /**
