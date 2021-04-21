@@ -47,19 +47,21 @@ public class QuickSort {
             while (left < right && arr[right] >= pivot) {
                 right--;
             }
+            // 放在左边
+            if (left < right) {
+                arr[left++] = arr[right];
+            }
+
             //（2）从左开始找到比基准大的数
             while (left < right && arr[left] <= pivot) {
                 left++;
             }
-            // (3) 交换两个数在数组中的位置
+            // 放在右边
             if (left < right) {
-                int temp = arr[left];
-                arr[left] = arr[right];
-                arr[right] = temp;
+                arr[right--] = arr[left];
             }
         }
         // 交换基准数
-        arr[start] = arr[left];
         arr[left] = pivot;
 
         // 递归排序左子数组
