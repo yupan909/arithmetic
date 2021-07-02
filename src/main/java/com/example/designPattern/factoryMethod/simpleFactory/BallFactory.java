@@ -1,5 +1,7 @@
 package com.example.designPattern.factoryMethod.simpleFactory;
 
+import com.example.designPattern.factoryMethod.Ball;
+
 /**
  * 球类工厂类
  *

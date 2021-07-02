@@ -1,5 +1,7 @@
 package com.example.designPattern.factoryMethod.simpleFactory;
 
+import com.example.designPattern.factoryMethod.Ball;
+
 /**
  * 《简单工厂模式》
  *      简单工厂模式是由一个工厂对象决定创建出哪一种产品类的实例
