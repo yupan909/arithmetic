@@ -1,6 +1,4 @@
-package com.example.designPattern.factoryMethod.simpleFactory;
-
-import com.example.designPattern.factoryMethod.Ball;
+package com.example.designPattern.factory;
 
 /**
  * 篮球

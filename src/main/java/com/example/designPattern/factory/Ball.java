@@ -1,4 +1,4 @@
-package com.example.designPattern.factoryMethod;
+package com.example.designPattern.factory;
 
 /**
  * 球类
