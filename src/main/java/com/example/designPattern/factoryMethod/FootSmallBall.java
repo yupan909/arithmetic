@@ -6,7 +6,7 @@ package com.example.designPattern.factoryMethod;
  * @author yupan
  * @date 7/2/21 4:55 PM
  */
-public class FootSmallBall extends Ball {
+public class FootSmallBall implements Ball {
 
     @Override
     public void play() {

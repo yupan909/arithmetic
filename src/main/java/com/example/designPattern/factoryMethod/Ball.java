@@ -6,7 +6,7 @@ package com.example.designPattern.factoryMethod;
  * @author yupan
  * @date 7/2/21 4:54 PM
  */
-public abstract class Ball {
+public interface Ball {
 
-    public abstract void play();
+    void play();
 }

@@ -8,7 +8,7 @@ import com.example.designPattern.factoryMethod.Ball;
  * @author yupan
  * @date 7/2/21 4:55 PM
  */
-public class BasketBall extends Ball {
+public class BasketBall implements Ball {
 
     @Override
     public void play() {
