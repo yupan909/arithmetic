@@ -8,7 +8,7 @@ package com.example.designPattern.decorator;
  */
 public abstract class Condiment implements Beverage {
 
-    protected Beverage beverage;
+    private Beverage beverage;
 
     public Condiment(Beverage beverage) {
         this.beverage = beverage;

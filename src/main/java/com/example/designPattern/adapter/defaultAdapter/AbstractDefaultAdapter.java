@@ -10,7 +10,6 @@ import com.example.designPattern.adapter.ApplePhone;
  */
 public abstract class AbstractDefaultAdapter implements ApplePhone {
 
-
     @Override
     public void appleHeadset() {
 

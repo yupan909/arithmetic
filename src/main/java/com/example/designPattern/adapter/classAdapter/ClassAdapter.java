@@ -11,7 +11,6 @@ import com.example.designPattern.adapter.ApplePhone;
  */
 public class ClassAdapter extends AndroidPhoneImpl implements ApplePhone {
 
-
     @Override
     public void appleHeadset() {
         System.out.println("[类适配器]使用了耳机适配器");
