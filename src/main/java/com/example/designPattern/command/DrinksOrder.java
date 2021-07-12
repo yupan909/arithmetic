@@ -8,15 +8,13 @@ package com.example.designPattern.command;
  */
 public class DrinksOrder extends Order {
 
-    private Worker worker;
-
     public DrinksOrder(Worker worker) {
-        this.worker = worker;
+        super(worker);
     }
 
     @Override
     public void need() {
         System.out.println("来一瓶雪碧");
-        worker.action();
+        super.getWorker().action();
     }
 }

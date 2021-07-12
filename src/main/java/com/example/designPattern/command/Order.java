@@ -8,6 +8,20 @@ package com.example.designPattern.command;
  */
 public abstract class Order {
 
+    private Worker worker;
+
+    public Order(Worker worker) {
+        this.worker = worker;
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
+
     /**
      * 点餐
      */
