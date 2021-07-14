@@ -15,6 +15,6 @@ public class MealOrder extends Order {
     @Override
     public void need() {
         System.out.println("来一份小炒肉");
-        super.getWorker().action();
+        worker.action();
     }
 }

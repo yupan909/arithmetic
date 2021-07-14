@@ -15,6 +15,6 @@ public class DrinksOrder extends Order {
     @Override
     public void need() {
         System.out.println("来一瓶雪碧");
-        super.getWorker().action();
+        worker.action();
     }
 }
