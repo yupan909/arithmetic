@@ -13,7 +13,7 @@ package com.example.designPattern.decorator;
  *      1、Component抽象构件：Component是一个接口或者是抽象类，就是定义我们最核心的对象，也就是最原始的对象
  *       （在装饰模式中，必然有一个最基本、最核心、最原始的接口或抽象类充当Component抽象构件）。
  *
- *      2、ConcreteState具体状态角色：ConcreteComponent 具体构件，是Component的具体实现，要装饰的就是它。
+ *      2、ConcreteComponent具体构件角色：是Component的具体实现，要装饰的就是它。
  *
  *      3、Decorator装饰角色：一般是一个抽象类，实现Component接口或者抽象方法，它里面可不一定有抽象的方法呀，
  *        在它的属性里必然有一个private变量指向Component抽象构件（如果具体装饰角色只有一个，这个可以省略）。
