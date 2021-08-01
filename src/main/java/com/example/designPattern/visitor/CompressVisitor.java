@@ -9,12 +9,12 @@ package com.example.designPattern.visitor;
 public class CompressVisitor implements Visitor {
 
     @Override
-    public void visitPdf(PdfFile pdfFile) {
+    public void visitPdf(ResourceFile pdfFile) {
         System.out.println("压缩PDF文件：" + pdfFile.fileName);
     }
 
     @Override
-    public void visitWord(WordFile wordFile) {
+    public void visitWord(ResourceFile wordFile) {
         System.out.println("压缩Word文件：" + wordFile.fileName);
     }
 }

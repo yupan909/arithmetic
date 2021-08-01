@@ -12,11 +12,11 @@ public interface Visitor {
      * 访问PDF文件
      * @param pdfFile
      */
-    void visitPdf(PdfFile pdfFile);
+    void visitPdf(ResourceFile pdfFile);
 
     /**
      * 访问Word文件
      * @param wordFile
      */
-    void visitWord(WordFile wordFile);
+    void visitWord(ResourceFile wordFile);
 }
